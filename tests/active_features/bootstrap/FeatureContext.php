@@ -957,9 +957,7 @@ class FeatureContext implements Context, SnippetAcceptingContext
     private function checkResult($needle, $haystack)
     {
         $needle = $this->replacePlaceholders($needle);
-        print_r($needle);
-        print_r($haystack);
-        $result = preg_match("#" . preg_quote($needle . "#s"), $haystack);
+        $result = preg_match("#" . preg_quote($needle, '#') . '#s', $haystack);
         return $result;
     }
 

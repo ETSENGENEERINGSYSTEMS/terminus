@@ -10,12 +10,12 @@ Feature: Accessing the Dashboard
   @vcr site_dashboard
   Scenario: Printing out the main Dashboard URL
     When I run "terminus dashboard:view --print"
-    Then I should get: "https://[[dashboard_host]]/users/[[user_id]]"
+    Then I should get: "https://[[dashboard_host]]/users/[[user_id]]#sites"
 
   @vcr site_dashboard
   Scenario: Printing out the site Dashboard URL for a specific environment
-    When I run "terminus dashboard:view [[test_site_name]].multidev --print"
-    Then I should get: "https://[[dashboard_host]]/sites/11111111-1111-1111-1111111111111111#multidev/code"
+    When I run "terminus dashboard:view [[test_site_name]].dev --print"
+    Then I should get: "https://[[dashboard_host]]/sites/11111111-1111-1111-1111-111111111111#dev"
 
   Scenario: Opening a Dashboard window automatically
     # We cannot test for it, but `terminus dashboard:view ...` without `--print`

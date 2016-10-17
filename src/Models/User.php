@@ -66,7 +66,7 @@ class User extends TerminusModel implements ContainerAwareInterface
     public function dashboardUrl()
     {
         $url = sprintf(
-            '%s://%s/users/%s',
+            '%s://%s/users/%s#sites',
             Config::get('dashboard_protocol'),
             Config::get('dashboard_host'),
             $this->id
