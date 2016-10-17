@@ -278,6 +278,24 @@ class Environment extends TerminusModel
         return $number_of_commits;
     }
 
+    /**
+     * Provides Pantheon Dashboard URL for this environment
+     *
+     * @return string
+     */
+    public function dashboardUrl()
+    {
+        $url = sprintf(
+            '%s://%s/sites/%s#%s',
+            Config::get('dashboard_protocol'),
+            Config::get('dashboard_host'),
+            $this->site->id,
+            $this->id
+        );
+
+        return $url;
+    }
+
   /**
    * Gives database connection info for this environment
    *
