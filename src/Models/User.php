@@ -10,10 +10,12 @@ use Pantheon\Terminus\Collections\SshKeys;
 use Pantheon\Terminus\Collections\UserOrganizationMemberships;
 use Pantheon\Terminus\Collections\UserSiteMemberships;
 use Pantheon\Terminus\Collections\Workflows;
-use Terminus\Config;
+use Robo\Common\ConfigAwareTrait;
+use Robo\Contract\ConfigAwareInterface;
 
-class User extends TerminusModel implements ContainerAwareInterface
+class User extends TerminusModel implements ConfigAwareInterface, ContainerAwareInterface
 {
+    use ConfigAwareTrait;
     use ContainerAwareTrait;
 
     /**
@@ -67,8 +69,8 @@ class User extends TerminusModel implements ContainerAwareInterface
     {
         $url = sprintf(
             '%s://%s/users/%s#sites',
-            Config::get('dashboard_protocol'),
-            Config::get('dashboard_host'),
+            $this->getConfig()->get('dashboard_protocol'),
+            $this->getConfig()->get('dashboard_host'),
             $this->id
         );
 

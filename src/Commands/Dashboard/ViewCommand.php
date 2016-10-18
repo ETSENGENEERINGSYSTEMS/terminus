@@ -22,7 +22,7 @@ class ViewCommand extends TerminusCommand implements SiteAwareInterface
      * @usage terminus dashboard my-awesome-site.env-name --print
      *   Deploy from dev to test environment
      */
-    public function deploy($site_env = null, $options = ['print' => false,])
+    public function view($site_env = null, $options = ['print' => false,])
     {
         switch (php_uname('s')) {
             case 'Linux':
