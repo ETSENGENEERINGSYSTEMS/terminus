@@ -52,7 +52,7 @@ trait SiteAwareTrait
      * @TODO This should be moved to the input/validation stage when that is available.
      *
      * @param string $site_env_id The site/environment id in the form <site>[.<env>]
-     * @param string $default_env The default environment to use if none is specified.
+     * @param string $default_env The default environment to use if none is specified; null if not necessary
      * @return array The site and environment in an array.
      * @throws \Terminus\Exceptions\TerminusException
      */
@@ -62,12 +62,12 @@ trait SiteAwareTrait
         $site_id = $parts[0];
         $env_id = !empty($parts[1]) ? $parts[1] : $default_env;
 
-        if (empty($site_id) || empty($env_id)) {
+        if (isset($env_id) && (empty($site_id) || empty($env_id))) {
             throw new TerminusException('The environment argument must be given as <site_name>.<environment>');
         }
 
         $site = $this->getSite($site_id);
-        $env = $site->environments->get($env_id);
+        $env = isset($env_id) ? $site->environments->get($env_id) : null;
         return [$site, $env];
     }
 }

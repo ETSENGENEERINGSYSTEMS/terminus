@@ -8,7 +8,6 @@ use Terminus\Collections\Bindings;
 use Terminus\Collections\Commits;
 use Terminus\Collections\Hostnames;
 use Terminus\Collections\Workflows;
-use Terminus\Config;
 use Terminus\Exceptions\TerminusException;
 
 class Environment extends TerminusModel
@@ -286,10 +285,8 @@ class Environment extends TerminusModel
     public function dashboardUrl()
     {
         $url = sprintf(
-            '%s://%s/sites/%s#%s',
-            Config::get('dashboard_protocol'),
-            Config::get('dashboard_host'),
-            $this->site->id,
+            '%s#%s',
+            $this->site->dashboardUrl(),
             $this->id
         );
 

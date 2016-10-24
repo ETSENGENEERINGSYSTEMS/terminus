@@ -8,9 +8,14 @@ Feature: Accessing the Dashboard
     And a site named "[[test_site_name]]"
 
   @vcr site_dashboard
-  Scenario: Printing out the main Dashboard URL
+  Scenario: Printing out a user account Dashboard URL
     When I run "terminus dashboard:view --print"
     Then I should get: "https://[[dashboard_host]]/users/[[user_id]]#sites"
+
+  @vcr site_dashboard
+  Scenario: Printing out the site Dashboard URL
+    When I run "terminus dashboard:view [[test_site_name]] --print"
+    Then I should get: "https://[[dashboard_host]]/sites/11111111-1111-1111-1111-111111111111"
 
   @vcr site_dashboard
   Scenario: Printing out the site Dashboard URL for a specific environment

@@ -35,7 +35,7 @@ interface SiteAwareInterface
      * Get the site and environment with the given ids.
      *
      * @param string $site_env_id The site/environment id in the form <site>[.<env>]
-     * @param string $default_env The default environment to use if none is specified.
+     * @param string $default_env The default environment to use if none is specified; null if not required
      * @return array The site and environment in an array.
      */
     public function getSiteEnv($site_env_id, $default_env);

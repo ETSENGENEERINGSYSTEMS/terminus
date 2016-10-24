@@ -19,8 +19,14 @@ class ViewCommand extends TerminusCommand implements SiteAwareInterface
      * @option string $site_env Site & environment to deploy to, in the form `site-name.env`
      * @option boolean $print Don't try to open the link, just output it
      *
-     * @usage terminus dashboard my-awesome-site.env-name --print
-     *   Deploy from dev to test environment
+     * @usage terminus dashboard
+     *   Opens browser to user's account on Pantheon Dashboard
+     * @usage terminus dashboard --print
+     *   Prints url for user's account on Pantheon Dashboard
+     * @usage terminus dashboard my-awesome-site
+     *   Opens browser to site on Pantheon Dashboard
+     * @usage terminus dashboard my-awesome-site.env-name
+     *   Opens browser to specific site environment on Pantheon Dashboard
      */
     public function view($site_env = null, $options = ['print' => false,])
     {
@@ -37,8 +43,12 @@ class ViewCommand extends TerminusCommand implements SiteAwareInterface
         }
 
         if ($site_env) {
-            list(, $env) = $this->getSiteEnv($site_env, 'dev');
-            $url = $env->dashboardUrl();
+            list($site, $env) = $this->getSiteEnv($site_env, null);
+            if ($env) {
+                $url = $env->dashboardUrl();
+            } else {
+                $url = $site->dashboardUrl();
+            }
         } else {
             $url = $this->session()->getUser()->dashboardUrl();
         }
